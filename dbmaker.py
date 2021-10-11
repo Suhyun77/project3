@@ -18,20 +18,16 @@ cur.execute("""CREATE TABLE Entrance(
 				Id INTEGER,
                 Date TEXT,
                 Weekend INTEGER,
-                Adults_guest INTEGER,
-                Youth_guest INTEGER,
-                Child_guest INTEGER, 
-                Foreigner_guest INTEGER,
-                Group_guest INTEGER,
-                Subtotal INTEGER,
+                entrance_subtotal INTEGER,
                 Avg_temperature INTEGER,
                 Min_temperature INTEGER,
                 Max_temperature INTEGER,
-                rainfall INTEGER);
+                Rainfall INTEGER,
+                Holiday INTEGER);
 			""")
 
-for d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13 in df_list:
-    cur.execute("INSERT INTO Entrance (Id, Date, Weekend, Adults_guest, Youth_guest, Child_guest, Foreigner_guest, Group_guest, Subtotal, Avg_temperature, Min_temperature, Max_temperature, rainfall) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);", (d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12, d13))
+for d1, d2, d3, d4, d5, d6, d7, d8, d9 in df_list:
+    cur.execute("INSERT INTO Entrance (Id, Date, Weekend, entrance_subtotal, Avg_temperature, Min_temperature, Max_temperature, Rainfall, Holiday) VALUES (?,?,?,?,?,?,?,?,?);", (d1, d2, d3, d4, d5, d6, d7, d8, d9))
 
 conn.commit()
 
