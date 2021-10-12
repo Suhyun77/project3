@@ -7,17 +7,9 @@ import pandas as pd
 def app_factory():
     app = Flask(__name__)
 
-    # XgBoost Model
-    # model = xgboost.XGBClassifier()
-    # model.load_model("project3_model.pkl")
-    # filepath = os.path.join(os.getcwd(), "xgb_model.bst")
     model = joblib.load('project3_model_.pkl')
-    # booster = Booster()
-    # model = booster.load_model(filepath)
-
-    # sess = model.Session()
-    # sess.run(model)
-
+    
+    
     @app.route("/", methods=['GET', 'POST'])
     def index():
         if request.method == 'GET':
@@ -34,7 +26,7 @@ def app_factory():
 
         data = np.array([weekend, avg_temp, min_temp, max_temp, rain_fall, holiday]).reshape(1, -1)
         data = pd.DataFrame(data)
-        
+
         entrance_subtotal = model.predict(data)
 
         return render_template('index.html', entrance_subtotal=entrance_subtotal)
